@@ -16,5 +16,8 @@
             "js": ["js/replace.js"],
             "run_at": "document_end"
         }
+    ],
+    "web_accessible_resources": [
+        "data/filters.json"
     ]
 }

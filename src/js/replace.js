@@ -1,9 +1,4 @@
-function handleText(textNode, regexes) {
-    regexes.forEach(function (regex) {
-        textNode.nodeValue = textNode.nodeValue.replace(regex.regex, regex.replacement);
-    });
-}
-
+/* Handles the actual filtering on the page */
 function walk(node, regexes) {
     var child, next;
 
@@ -24,12 +19,25 @@ function walk(node, regexes) {
     }
 }
 
-function buildRegexes() {
-    var filters = {
-        "regex": "poodles",
-        "chrome": "firetrucks"
-    };
+function handleText(textNode, regexes) {
+    regexes.forEach(function (regex) {
+        textNode.nodeValue = textNode.nodeValue.replace(regex.regex, regex.replacement);
+    });
+}
 
+/* Filter loading */
+function loadFilters() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            filters = JSON.parse(xhr.responseText);
+        }
+    };
+    xhr.open("GET", chrome.extension.getURL('../data/filters.json'), false);
+    xhr.send();
+}
+
+function buildRegexes(filters) {
     var regexes = [];
 
     for (var filter in filters) {
@@ -43,8 +51,10 @@ function buildRegexes() {
     return regexes;
 }
 
-// Handles disabling of the script
+/* Handles disabling of the script */
 var disabled = (localStorage.getItem("care-filter-disabled") === null ? false : parse(localStorage.getItem("care-filter-disabled")));
+var filters = {};
+loadFilters();
 
 // LocalStorage stores as strings, so need to convert to boolean
 function parse(type) {
@@ -58,6 +68,6 @@ chrome.runtime.onMessage.addListener(
 );
 
 if (!disabled) {
-    var regexes = buildRegexes();
+    var regexes = buildRegexes(filters);
     walk(document.body, regexes);
 }
