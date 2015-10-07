@@ -43,12 +43,16 @@ function buildRegexes(filters) {
     for (var filter in filters) {
         if (filters.hasOwnProperty(filter)) {
             var replacement = filters[filter];
-            var regex = new RegExp("\\b" + filter + "\\b", "gi");
+            var regex = new RegExp("\\b" + escapeRegExp(filter) + "\\b", "gi");
             regexes.push({regex: regex, replacement: replacement});
         }
     }
 
     return regexes;
+}
+
+function escapeRegExp(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
 
 /* Handles disabling of the script */

@@ -5,11 +5,11 @@ chrome.browserAction.onClicked.addListener(toggle);
 function toggle() {
     debugger;
     if (disabled) {
-        chrome.browserAction.setIcon({path: "../images/icon.png"});
+        chrome.browserAction.setIcon({path: "../images/icon-32.png"});
         localStorage.setItem("care-filter-disabled", false);
         disabled = false;
     } else {
-        chrome.browserAction.setIcon({path: "../images/icon-disabled.png"});
+        chrome.browserAction.setIcon({path: "../images/icon-32-disabled.png"});
         localStorage.setItem("care-filter-disabled", true);
         disabled = true;
     }

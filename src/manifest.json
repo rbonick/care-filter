@@ -1,11 +1,11 @@
 {
     "manifest_version": 2,
     "name": "Super Mega Awesome Care-Tags Filter Extraordinaire",
-    "description": "This extension will replace a wide assortment of words with the care-tags™-approved versions of the words",
+    "description": "This extension will replace a wide assortment of words with the care-tags™-approved replacement.",
     "version": "1.0",
     "browser_action": {
-        "default_icon": "images/icon.png",
-        "default_title": "care-tags filter"
+        "default_icon": "images/icon-32.png",
+        "default_title": "Super Mega Awesome Care-Tags Filter Extraordinaire"
     },
     "background": {
         "scripts": ["js/toggle.js"]
@@ -19,5 +19,11 @@
     ],
     "web_accessible_resources": [
         "data/filters.json"
-    ]
+    ],
+    "icons": {
+        "128": "images/icon-128.png",
+        "48": "images/icon-48.png",
+        "32": "images/icon-32.png",
+        "16": "images/icon-16.png"
+    }
 }
