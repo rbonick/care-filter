@@ -1,0 +1,3 @@
+Regex for adding new filters from google sheets:
+Find: ^\s*([^"\t]*)\t(.*)
+Replace: "$1": "$2",
